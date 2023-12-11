@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import pl.training.bestweather.R
 import pl.training.bestweather.databinding.ActivityForecastBinding
 import pl.training.bestweather.forecast.commons.hideKeyboard
@@ -13,13 +15,20 @@ import pl.training.bestweather.forecast.commons.setDrawable
 class ForecastActivity : AppCompatActivity() {
 
     private val viewModel: ForecastViewModel by viewModels()
+    private val forecastRecyclerViewAdapter = ForecastRecyclerViewAdapter()
     private lateinit var binding: ActivityForecastBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityForecastBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        init()
         bind()
+    }
+
+    private fun init() {
+        binding.nextDaysForecast.layoutManager = LinearLayoutManager(this, HORIZONTAL, false)
+        binding.nextDaysForecast.adapter = forecastRecyclerViewAdapter
     }
 
     private fun bind() {
@@ -40,6 +49,7 @@ class ForecastActivity : AppCompatActivity() {
             binding.temperature.text = temperature
             binding.pressure.text = pressure
         }
+        forecastRecyclerViewAdapter.update(forecast.drop(1))
     }
 
 }

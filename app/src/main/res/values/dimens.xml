@@ -6,4 +6,6 @@
     <dimen name="icon_size">240dp</dimen>
     <dimen name="big_font">36sp</dimen>
     <dimen name="normal_font">24sp</dimen>
+    <dimen name="small_font">16sp</dimen>
+    <dimen name="small_icon">40dp</dimen>
 </resources>
