@@ -1,4 +1,11 @@
 package pl.training.bestweather.forecast.domain
 
-class DayFortecast {
-}
+import java.util.Date
+
+data class DayForecast(
+    val iconName: String,
+    val description: String,
+    val temperature: Double,
+    val pressure: Double,
+    val date: Date
+)
