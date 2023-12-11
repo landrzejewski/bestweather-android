@@ -3,9 +3,11 @@ package pl.training.bestweather.forecast.adapters.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import pl.training.bestweather.R
 import pl.training.bestweather.databinding.ActivityForecastBinding
+import pl.training.bestweather.forecast.commons.hideKeyboard
 import pl.training.bestweather.forecast.commons.setDrawable
 
 class ForecastActivity : AppCompatActivity() {
@@ -22,15 +24,22 @@ class ForecastActivity : AppCompatActivity() {
 
     private fun bind() {
         viewModel.forecast.observe(this, ::updateView)
-        binding.checkBtn.setOnClickListener {
-            val city = binding.cityName.text.toString()
-            viewModel.refreshForecastFor(city)
-        }
+        binding.checkBtn.setOnClickListener(::onForecastCheck)
+    }
+
+    private fun onForecastCheck(view: View) {
+        val city = binding.cityName.text.toString()
+        view.hideKeyboard()
+        viewModel.refreshForecastFor(city)
     }
 
     private fun updateView(forecast: List<DayForecastViewModel>) {
-        val currentForecast = forecast.first()
-        binding.icon.setDrawable(currentForecast.iconName)
+        with (forecast.first()) {
+            binding.icon.setDrawable(iconName)
+            binding.description.text = description
+            binding.temperature.text = temperature
+            binding.pressure.text = pressure
+        }
     }
 
 }
