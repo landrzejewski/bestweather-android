@@ -6,10 +6,12 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
+import dagger.hilt.android.AndroidEntryPoint
 import pl.training.bestweather.databinding.ActivityForecastBinding
 import pl.training.bestweather.commons.hideKeyboard
 import pl.training.bestweather.commons.setDrawable
 
+@AndroidEntryPoint
 class ForecastActivity : AppCompatActivity() {
 
     private val viewModel: ForecastViewModel by viewModels()
