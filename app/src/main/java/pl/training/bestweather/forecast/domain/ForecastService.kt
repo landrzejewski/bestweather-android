@@ -1,6 +1,7 @@
 package pl.training.bestweather.forecast.domain
 
 import pl.training.bestweather.forecast.ports.ForecastProvider
+import pl.training.bestweather.forecast.ports.ForecastRepository
 
 class ForecastService(private val forecastProvider: ForecastProvider, private val forecastRepository: ForecastRepository) {
 
