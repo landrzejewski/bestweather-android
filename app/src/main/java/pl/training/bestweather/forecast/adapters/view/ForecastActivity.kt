@@ -41,7 +41,7 @@ class ForecastActivity : AppCompatActivity() {
             binding.temperature.text = temperature
             binding.pressure.text = pressure
         }
-        forecastRecyclerViewAdapter.update(forecast)
+        forecastRecyclerViewAdapter.update(forecast.dropLast(1))
     }
 
     private fun onForecastCheck(view: View) {
