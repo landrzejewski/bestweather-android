@@ -23,8 +23,8 @@ class ForecastViewModel @Inject constructor(
     val forecast: LiveData<List<DayForecastViewModel>> = mutableForecast
 
     init {
-        val city = store.get(CITY_KEY)
         viewModelScope.launch {
+            val city = store.get(CITY_KEY)
             onForecastLoaded(forecastService.getCachedFor(city))
         }
     }
