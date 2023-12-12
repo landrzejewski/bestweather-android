@@ -1,29 +1,40 @@
 package pl.training.bestweather.forecast.adapters.view
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import pl.training.bestweather.R
+import pl.training.bestweather.commons.setDrawable
+import pl.training.bestweather.databinding.ItemDayForecastBinding
 
-class ForecastRecyclerViewAdapter : RecyclerView.Adapter<ForecastRecyclerViewAdapter.ViewHolder>() {
+class ForecastRecyclerViewAdapter(private var forecast: List<DayForecastViewModel> = emptyList()) : RecyclerView.Adapter<ForecastRecyclerViewAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        private val binding = ItemDayForecastBinding.bind(view)
+
+        fun update(dayForecastViewModel: DayForecastViewModel) {
+            binding.icon.setDrawable(dayForecastViewModel.iconName)
+            binding.temperature.text = dayForecastViewModel.temperature
+            binding.date.text = dayForecastViewModel.date
+        }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(R.layout.item_day_forecast, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.update(forecast[position])
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount() = forecast.size
 
     fun update(forecast: List<DayForecastViewModel>) {
-        TODO("Not yet implemented")
+        this.forecast = forecast
+        notifyDataSetChanged()
     }
 
 }

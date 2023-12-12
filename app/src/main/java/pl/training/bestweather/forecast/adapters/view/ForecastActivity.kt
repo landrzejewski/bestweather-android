@@ -34,12 +34,6 @@ class ForecastActivity : AppCompatActivity() {
         binding.checkBtn.setOnClickListener(::onForecastCheck)
     }
 
-    private fun onForecastCheck(view: View) {
-        val city = binding.cityName.text.toString()
-        view.hideKeyboard()
-        viewModel.refreshForecastFor(city)
-    }
-
     private fun updateView(forecast: List<DayForecastViewModel>) {
         with (forecast.first()) {
             binding.icon.setDrawable(iconName)
@@ -47,7 +41,13 @@ class ForecastActivity : AppCompatActivity() {
             binding.temperature.text = temperature
             binding.pressure.text = pressure
         }
-        forecastRecyclerViewAdapter.update(forecast.drop(1))
+        forecastRecyclerViewAdapter.update(forecast)
+    }
+
+    private fun onForecastCheck(view: View) {
+        view.hideKeyboard()
+        val city = binding.cityName.text.toString()
+        viewModel.refreshForecastFor(city)
     }
 
 }

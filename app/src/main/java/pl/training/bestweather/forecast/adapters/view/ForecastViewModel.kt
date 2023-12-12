@@ -10,25 +10,22 @@ import pl.training.bestweather.commons.formatDate
 import pl.training.bestweather.commons.formatPressure
 import pl.training.bestweather.commons.formatTemperature
 import pl.training.bestweather.forecast.domain.DayForecast
-import pl.training.bestweather.forecast.domain.Forecast
+import pl.training.bestweather.forecast.domain.ForecastService
 
 class ForecastViewModel : ViewModel() {
 
-    private val forecastService = Forecast(FakeForecastProvider())
+    private val forecastService = ForecastService(FakeForecastProvider())
+    private val mapper = ForecastViewModelMapper()
+    private val mutableForecast = MutableLiveData<List<DayForecastViewModel>>()
 
-    private val forecastData = MutableLiveData<List<DayForecastViewModel>>()
-
-    val forecast: LiveData<List<DayForecastViewModel>> = forecastData
+    val forecast: LiveData<List<DayForecastViewModel>> = mutableForecast
 
     fun refreshForecastFor(city: String) {
         viewModelScope.launch {
-            val data = forecastService.getFor(city).map(::toViewModel)
-            forecastData.postValue(data)
+            val data = forecastService.getFor(city)
+                .map(mapper::toViewModel)
+            mutableForecast.postValue(data)
         }
-    }
-
-    private fun toViewModel(dayForecast: DayForecast) = with(dayForecast) {
-        DayForecastViewModel(iconName, description, formatTemperature(temperature), formatPressure(pressure), formatDate(date))
     }
 
 }
