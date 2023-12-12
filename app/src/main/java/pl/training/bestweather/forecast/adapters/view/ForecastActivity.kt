@@ -2,15 +2,13 @@ package pl.training.bestweather.forecast.adapters.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
-import pl.training.bestweather.R
 import pl.training.bestweather.databinding.ActivityForecastBinding
-import pl.training.bestweather.forecast.commons.hideKeyboard
-import pl.training.bestweather.forecast.commons.setDrawable
+import pl.training.bestweather.commons.hideKeyboard
+import pl.training.bestweather.commons.setDrawable
 
 class ForecastActivity : AppCompatActivity() {
 

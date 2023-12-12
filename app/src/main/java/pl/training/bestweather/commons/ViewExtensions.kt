@@ -1,4 +1,4 @@
-package pl.training.bestweather.forecast.commons
+package pl.training.bestweather.commons
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.View

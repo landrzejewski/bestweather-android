@@ -1,4 +1,4 @@
-package pl.training.bestweather.forecast.commons
+package pl.training.bestweather.commons
 
 import java.text.SimpleDateFormat
 import java.util.*

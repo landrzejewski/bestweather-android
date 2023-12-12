@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import pl.training.bestweather.forecast.adapters.provider.FakeForecastProvider
-import pl.training.bestweather.forecast.commons.formatDate
-import pl.training.bestweather.forecast.commons.formatPressure
-import pl.training.bestweather.forecast.commons.formatTemperature
+import pl.training.bestweather.commons.formatDate
+import pl.training.bestweather.commons.formatPressure
+import pl.training.bestweather.commons.formatTemperature
 import pl.training.bestweather.forecast.domain.DayForecast
 import pl.training.bestweather.forecast.domain.Forecast
 
