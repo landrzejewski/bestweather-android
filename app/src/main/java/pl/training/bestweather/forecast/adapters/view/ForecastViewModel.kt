@@ -18,15 +18,14 @@ class ForecastViewModel @Inject constructor(private val forecastService: Forecas
 
     fun refreshForecastFor(city: String) {
         viewModelScope.launch {
-            val data = forecastService.getFor(city)
-                .map(mapper::toViewModel)
-           onForecastLoaded(data)
+            val forecast = forecastService.getFor(city).map(mapper::toViewModel)
+            update(forecast)
         }
     }
 
-    private fun onForecastLoaded(data: List<DayForecastViewModel>) {
-        if (data.isNotEmpty()) {
-            mutableForecast.postValue(data)
+    private fun update(forecast: List<DayForecastViewModel>) {
+        if (forecast.isNotEmpty()) {
+            mutableForecast.postValue(forecast)
         }
     }
 
