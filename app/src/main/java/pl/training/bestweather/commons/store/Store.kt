@@ -1,4 +1,4 @@
-package pl.training.bestweather.commons.localstorage
+package pl.training.bestweather.commons.store
 
 interface Store {
 

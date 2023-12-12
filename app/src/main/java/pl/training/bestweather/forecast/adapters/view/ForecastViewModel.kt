@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import pl.training.bestweather.commons.localstorage.Store
+import pl.training.bestweather.commons.store.Store
 import pl.training.bestweather.forecast.domain.ForecastService
 import javax.inject.Inject
 

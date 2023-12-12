@@ -9,8 +9,8 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BASIC
-import pl.training.bestweather.commons.localstorage.Store
-import pl.training.bestweather.commons.localstorage.SharedPreferencesStore
+import pl.training.bestweather.commons.store.Store
+import pl.training.bestweather.commons.store.SharedPreferencesStore
 import javax.inject.Singleton
 
 @Module

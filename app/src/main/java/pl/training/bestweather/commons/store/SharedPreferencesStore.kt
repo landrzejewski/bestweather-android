@@ -1,4 +1,4 @@
-package pl.training.bestweather.commons.localstorage
+package pl.training.bestweather.commons.store
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
