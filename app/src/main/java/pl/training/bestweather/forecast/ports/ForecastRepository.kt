@@ -1,4 +1,6 @@
-package pl.training.bestweather.forecast.domain
+package pl.training.bestweather.forecast.ports
+
+import pl.training.bestweather.forecast.domain.DayForecast
 
 interface ForecastRepository {
 

@@ -14,7 +14,7 @@ import pl.training.bestweather.forecast.adapters.provider.persistence.ForecastDa
 import pl.training.bestweather.forecast.adapters.provider.persistence.ForecastRoomAdapter
 import pl.training.bestweather.forecast.adapters.provider.persistence.ForecastRoomMapper
 import pl.training.bestweather.forecast.adapters.view.ForecastViewModelMapper
-import pl.training.bestweather.forecast.domain.ForecastRepository
+import pl.training.bestweather.forecast.ports.ForecastRepository
 import pl.training.bestweather.forecast.domain.ForecastService
 import pl.training.bestweather.forecast.ports.ForecastProvider
 import retrofit2.Retrofit

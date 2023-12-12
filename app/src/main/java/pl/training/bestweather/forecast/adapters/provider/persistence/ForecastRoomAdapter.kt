@@ -1,9 +1,10 @@
 package pl.training.bestweather.forecast.adapters.provider.persistence
 
 import pl.training.bestweather.forecast.domain.DayForecast
-import pl.training.bestweather.forecast.domain.ForecastRepository
+import pl.training.bestweather.forecast.ports.ForecastRepository
 
-class ForecastRoomAdapter(private val dao: ForecastDao, private val mapper: ForecastRoomMapper) : ForecastRepository {
+class ForecastRoomAdapter(private val dao: ForecastDao, private val mapper: ForecastRoomMapper) :
+    ForecastRepository {
 
     override suspend fun save(city: String, forecast: List<DayForecast>) {
         dao.save(mapper.toEntity(city))
