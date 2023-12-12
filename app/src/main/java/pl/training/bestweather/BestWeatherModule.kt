@@ -1,6 +1,7 @@
 package pl.training.bestweather
 
 import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,5 +31,12 @@ class BestWeatherModule {
     @Singleton
     @Provides
     fun store(@ApplicationContext context: Context): Store = SharedPreferencesStore(context)
+
+    @Singleton
+    @Provides
+    fun database(@ApplicationContext context: Context): BestWeatherDatabase = Room
+        .databaseBuilder(context, BestWeatherDatabase::class.java, "best-weather")
+        .fallbackToDestructiveMigration()
+        .build()
 
 }

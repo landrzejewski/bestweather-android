@@ -5,11 +5,16 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import pl.training.bestweather.BestWeatherDatabase
 import pl.training.bestweather.forecast.adapters.provider.FakeForecastProvider
 import pl.training.bestweather.forecast.adapters.provider.openweather.OpenWeatherAdapter
 import pl.training.bestweather.forecast.adapters.provider.openweather.OpenWeatherApi
 import pl.training.bestweather.forecast.adapters.provider.openweather.OpenWeatherMapper
+import pl.training.bestweather.forecast.adapters.provider.persistence.ForecastDao
+import pl.training.bestweather.forecast.adapters.provider.persistence.ForecastRoomAdapter
+import pl.training.bestweather.forecast.adapters.provider.persistence.ForecastRoomMapper
 import pl.training.bestweather.forecast.adapters.view.ForecastViewModelMapper
+import pl.training.bestweather.forecast.domain.ForecastRepository
 import pl.training.bestweather.forecast.domain.ForecastService
 import pl.training.bestweather.forecast.ports.ForecastProvider
 import retrofit2.Retrofit
@@ -52,7 +57,21 @@ class ForecastModule {
 
     @Singleton
     @Provides
-    fun forecastService(@OpenWeather forecastProvider: ForecastProvider): ForecastService = ForecastService(forecastProvider)
+    fun forecastDao(database: BestWeatherDatabase): ForecastDao = database.forecastDao()
+
+    @Singleton
+    @Provides
+    fun forecastRoomMapper(): ForecastRoomMapper = ForecastRoomMapper()
+
+    @Singleton
+    @Provides
+    fun forecastRoomRepository(forecastDao: ForecastDao, forecastRoomMapper: ForecastRoomMapper): ForecastRepository
+        = ForecastRoomAdapter(forecastDao, forecastRoomMapper)
+
+    @Singleton
+    @Provides
+    fun forecastService(@OpenWeather forecastProvider: ForecastProvider, forecastRepository: ForecastRepository): ForecastService
+        = ForecastService(forecastProvider, forecastRepository)
 
 }
 
