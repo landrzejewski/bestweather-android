@@ -1,4 +1,4 @@
-package pl.training.goodweather.forecast.adapter.provider.openweathermap
+package pl.training.bestweather.forecast.adapters.provider.openweather
 
 data class WeatherDto(
     val icon: String,
