@@ -3,7 +3,7 @@ package pl.training.bestweather.commons.localstorage
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 
-class SharedPreferencesPropertiesMap(private val context: Context): PropertiesMap {
+class SharedPreferencesStore(private val context: Context): Store {
 
     override fun set(key: String, value: String) = getPreferences()
         .edit()

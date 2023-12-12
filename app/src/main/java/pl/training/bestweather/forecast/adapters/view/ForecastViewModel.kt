@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import pl.training.bestweather.commons.localstorage.PropertiesMap
+import pl.training.bestweather.commons.localstorage.Store
 import pl.training.bestweather.forecast.domain.ForecastService
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class ForecastViewModel @Inject constructor(
     private val forecastService: ForecastService,
     private val mapper: ForecastViewModelMapper,
-    private val propertiesMap: PropertiesMap
+    private val store: Store
 ) : ViewModel() {
 
     private val mutableForecast = MutableLiveData<List<DayForecastViewModel>>()
@@ -22,7 +22,7 @@ class ForecastViewModel @Inject constructor(
     val forecast: LiveData<List<DayForecastViewModel>> = mutableForecast
 
     init {
-        val city = propertiesMap.get(CITY_KEY)
+        val city = store.get(CITY_KEY)
         if (city.isNotBlank()) {
             refreshForecastFor(city)
         }
@@ -32,7 +32,7 @@ class ForecastViewModel @Inject constructor(
         viewModelScope.launch {
             val data = forecastService.getFor(city)
                 .map(mapper::toViewModel)
-            propertiesMap.set(CITY_KEY, city)
+            store.set(CITY_KEY, city)
             onForecastLoaded(data)
         }
     }

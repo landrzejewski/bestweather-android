@@ -9,8 +9,8 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BASIC
-import pl.training.bestweather.commons.localstorage.PropertiesMap
-import pl.training.bestweather.commons.localstorage.SharedPreferencesPropertiesMap
+import pl.training.bestweather.commons.localstorage.Store
+import pl.training.bestweather.commons.localstorage.SharedPreferencesStore
 import javax.inject.Singleton
 
 @Module
@@ -29,6 +29,6 @@ class BestWeatherModule {
 
     @Singleton
     @Provides
-    fun propertiesMap(@ApplicationContext context: Context): PropertiesMap = SharedPreferencesPropertiesMap(context)
+    fun store(@ApplicationContext context: Context): Store = SharedPreferencesStore(context)
 
 }
