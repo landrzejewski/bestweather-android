@@ -1,14 +1,17 @@
 package pl.training.bestweather.forecast.adapters.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import dagger.hilt.android.AndroidEntryPoint
+import pl.training.bestweather.R
 import pl.training.bestweather.commons.hideKeyboard
 import pl.training.bestweather.commons.setDrawable
 import pl.training.bestweather.databinding.FragmentForecastBinding
@@ -40,6 +43,10 @@ class ForecastFragment : Fragment() {
     private fun bind() {
         viewModel.forecast.observe(viewLifecycleOwner, ::updateView)
         binding.checkBtn.setOnClickListener(::onForecastCheck)
+        forecastRecyclerViewAdapter.tapListener = {
+            viewModel.selectedDayForecast = it
+            findNavController().navigate(R.id.show_forecast_details)
+        }
     }
 
     private fun updateView(forecast: List<DayForecastViewModel>) {

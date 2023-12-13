@@ -10,6 +10,16 @@
         android:name="pl.training.bestweather.forecast.adapters.view.ForecastFragment"
         android:label="@string/forecast_fragment_label"
         tools:layout="@layout/fragment_forecast">
+        <action
+            android:id="@+id/show_forecast_details"
+            app:destination="@id/ForecastDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ForecastDetailsFragment"
+        android:name="pl.training.bestweather.forecast.adapters.view.ForecastDetailsFragment"
+        android:label="@string/forecast_fragment_label"
+        tools:layout="@layout/fragment_forecast_details">
     </fragment>
 
 </navigation>

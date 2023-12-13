@@ -20,6 +20,7 @@ class ForecastViewModel @Inject constructor(
     private val mutableForecast = MutableLiveData<List<DayForecastViewModel>>()
 
     val forecast: LiveData<List<DayForecastViewModel>> = mutableForecast
+    var selectedDayForecast: DayForecastViewModel? = null
 
     init {
         val city = store.get(CITY_KEY)
