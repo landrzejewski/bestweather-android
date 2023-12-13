@@ -1,38 +1,44 @@
 package pl.training.bestweather.forecast.adapters.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.viewModels
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import dagger.hilt.android.AndroidEntryPoint
-import pl.training.bestweather.databinding.ActivityForecastBinding
 import pl.training.bestweather.commons.hideKeyboard
 import pl.training.bestweather.commons.setDrawable
+import pl.training.bestweather.databinding.FragmentForecastBinding
 
 @AndroidEntryPoint
-class ForecastActivity : AppCompatActivity() {
+class ForecastFragment : Fragment() {
 
-    private val viewModel: ForecastViewModel by viewModels()
+    private val viewModel: ForecastViewModel by activityViewModels()
     private val forecastRecyclerViewAdapter = ForecastRecyclerViewAdapter()
-    private lateinit var binding: ActivityForecastBinding
+    private lateinit var binding: FragmentForecastBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityForecastBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        init()
-        bind()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentForecastBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        init()
+//        bind()
     }
 
     private fun init() {
-        binding.nextDaysForecast.layoutManager = LinearLayoutManager(this, HORIZONTAL, false)
+        binding.nextDaysForecast.layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
         binding.nextDaysForecast.adapter = forecastRecyclerViewAdapter
     }
 
     private fun bind() {
-        viewModel.forecast.observe(this, ::updateView)
+        viewModel.forecast.observe(viewLifecycleOwner, ::updateView)
         binding.checkBtn.setOnClickListener(::onForecastCheck)
     }
 
