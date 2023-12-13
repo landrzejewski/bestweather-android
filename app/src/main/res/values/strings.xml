@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">BestWeather</string>
-    <string name="forecast_fragment_label">First Fragment</string>
+    <string name="forecast_fragment_label">BestWeather</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="enter_city_name">Enter city name</string>

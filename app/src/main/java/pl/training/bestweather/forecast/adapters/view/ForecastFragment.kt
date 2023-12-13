@@ -28,8 +28,8 @@ class ForecastFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        init()
-//        bind()
+        init()
+        bind()
     }
 
     private fun init() {
