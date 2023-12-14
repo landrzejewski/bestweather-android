@@ -23,6 +23,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.PolygonOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import dagger.hilt.android.AndroidEntryPoint
 import pl.training.bestweather.R
 import pl.training.bestweather.databinding.FragmentTrackingBinding
@@ -75,6 +77,7 @@ class TrackingFragment : Fragment() {
                 val distance = if (viewModel.lastLocation == null) 0F else it.distanceTo(viewModel.lastLocation!!)
                 val position = Position(it.longitude, it.latitude)
                 viewModel.onLocationChange(position, it.speed, distance)
+                drawRoute(it)
                 updateStats()
                 viewModel.lastLocation = it
             }
@@ -110,6 +113,17 @@ class TrackingFragment : Fragment() {
         val positionUpdate = newLatLngZoom(position, CAMERA_ZOOM)
         map.animateCamera(positionUpdate)
     }
+    private fun drawRoute(location: Location) {
+        viewModel.lastLocation?.let { lastLocation ->
+            val options = PolylineOptions()
+            options.color(R.color.main)
+            options.width(10F)
+            options.add(LatLng(location.latitude, location.longitude))
+            options.add(LatLng(lastLocation.latitude, lastLocation.longitude))
+            map.addPolyline(options)
+        }
+    }
+
 
     companion object {
 
