@@ -57,7 +57,7 @@ class ProfileFragment : Fragment() {
 
     private fun bind() {
         binding.profilePhoto.setOnClickListener {
-            showDialog()
+            if (allPermissionsGranted()) showDialog() else requestPermissionLauncher.launch(REQUIRED_PERMISSIONS)
         }
     }
 
@@ -66,18 +66,13 @@ class ProfileFragment : Fragment() {
         AlertDialog.Builder(requireContext()).setItems(options) { dialog, which ->
             when (which) {
                 0 -> startCamera()
-                1 -> takePhoto()
+                1 -> chooseFromGallery()
                 else -> dialog.dismiss()
             }
         }
             .setTitle("Select option")
             .show()
     }
-
-    private fun takePhoto() =
-        if (allPermissionsGranted()) chooseFromGallery() else requestPermissionLauncher.launch(
-            REQUIRED_PERMISSIONS
-        )
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         checkSelfPermission(requireContext(), it) == PERMISSION_GRANTED
@@ -88,7 +83,7 @@ class ProfileFragment : Fragment() {
             val permissionGranted =
                 permissions.entries.any { it.key in REQUIRED_PERMISSIONS && it.value }
             if (permissionGranted) {
-                chooseFromGallery()
+                showDialog()
             } else {
                 Toast.makeText(requireContext(), "Permission request denied", LENGTH_SHORT).show()
             }
@@ -136,7 +131,7 @@ class ProfileFragment : Fragment() {
 
         private const val REQUEST_IMAGE_CAPTURE = 1
         private const val REQUEST_IMAGE_PICK = 2
-        private val REQUIRED_PERMISSIONS = mutableListOf(READ_EXTERNAL_STORAGE).toTypedArray()
+        private val REQUIRED_PERMISSIONS = mutableListOf(READ_EXTERNAL_STORAGE, CAMERA).toTypedArray()
 
     }
 
