@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import pl.training.bestweather.databinding.FragmentProfileBinding
 import pl.training.bestweather.databinding.FragmentTrackingBinding
 
 class TrackingFragment : Fragment() {

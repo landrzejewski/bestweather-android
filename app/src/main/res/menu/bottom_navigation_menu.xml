@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/ForecastFragment"
-        android:icon="@android:drawable/ic_menu_compass"
+        android:icon="@android:drawable/ic_menu_today"
         android:title="@string/forecast_fragment_label"/>
 
     <item android:id="@+id/TrackingFragment"
