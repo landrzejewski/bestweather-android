@@ -23,7 +23,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Picasso.get()
             .load("https://www.kindpng.com/picc/m/3-36825_and-art-default-profile-picture-png-transparent-png.png")
-            .transform(RoundedTransformation(460, 0))
+            .transform(RoundedTransformation(480, 0))
             .into(binding.profilePhoto)
     }
 
