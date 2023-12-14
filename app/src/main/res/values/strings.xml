@@ -6,7 +6,6 @@
     <string name="enter_city_name">Enter city name</string>
     <string name="check">Check</string>
     <string name="icon">Icon</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="profile_fragment_label">Profile</string>
     <string name="profile_photo">Profile photo</string>
     <string name="tracking_fragment_label">Tracking</string>
