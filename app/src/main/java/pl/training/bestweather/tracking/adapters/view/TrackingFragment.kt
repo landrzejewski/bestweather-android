@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -24,12 +25,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import pl.training.bestweather.R
 import pl.training.bestweather.databinding.FragmentTrackingBinding
+import pl.training.bestweather.tracking.domain.Position
 
 class TrackingFragment : Fragment() {
 
     private lateinit var binding: FragmentTrackingBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var map: GoogleMap
+    private val viewModel: TrackingViewModel by activityViewModels()
     private val locationRequest = LocationRequest.Builder(1_000)
         .setPriority(PRIORITY_HIGH_ACCURACY)
         .setMinUpdateDistanceMeters(5F)
@@ -39,6 +42,7 @@ class TrackingFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentTrackingBinding.inflate(layoutInflater)
         fusedLocationClient = getFusedLocationProviderClient(requireActivity())
+        viewModel.start()
         return binding.root
     }
 
@@ -64,10 +68,21 @@ class TrackingFragment : Fragment() {
 
     private val onLocationUpdate =  object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
-            for (location in locationResult.locations){
-               Log.i("###", location.toString())
+            locationResult.lastLocation?.let {
+                moveCamera(it)
+                val distance = if (viewModel.lastLocation == null) 0F else it.distanceTo(viewModel.lastLocation!!)
+                val position = Position(it.longitude, it.latitude)
+                viewModel.onLocationChange(position, it.speed, distance)
+                updateStats()
+                viewModel.lastLocation = it
             }
         }
+    }
+
+    private fun updateStats() {
+        binding.duration.text = viewModel.duration
+        binding.speed.text = viewModel.speed
+        binding.pace.text = viewModel.pace
     }
 
     @SuppressLint("MissingPermission")
