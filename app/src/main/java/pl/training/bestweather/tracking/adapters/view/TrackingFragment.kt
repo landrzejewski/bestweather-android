@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
@@ -94,7 +96,7 @@ class TrackingFragment : Fragment() {
             configureMap()
             fusedLocationClient.requestLocationUpdates(locationRequest, onLocationUpdate, getMainLooper())
         } else {
-            Log.i("###", "User denied location access")
+            Toast.makeText(requireContext(), "Permission request denied", LENGTH_SHORT).show()
         }
     }
 
