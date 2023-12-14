@@ -17,4 +17,8 @@ class TrackingFragment : Fragment() {
         return binding.root
     }
 
+    private fun createGoogleApiClient() {
+
+    }
+
 }
