@@ -23,10 +23,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import dagger.hilt.android.AndroidEntryPoint
 import pl.training.bestweather.R
 import pl.training.bestweather.databinding.FragmentTrackingBinding
 import pl.training.bestweather.tracking.domain.Position
 
+@AndroidEntryPoint
 class TrackingFragment : Fragment() {
 
     private lateinit var binding: FragmentTrackingBinding
