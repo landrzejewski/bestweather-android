@@ -80,8 +80,7 @@ class ProfileFragment : Fragment() {
 
     private val requestPermissionLauncher =
         registerForActivityResult(RequestMultiplePermissions()) { permissions ->
-            val permissionGranted =
-                permissions.entries.any { it.key in REQUIRED_PERMISSIONS && it.value }
+            val permissionGranted = permissions.entries.any { it.key in REQUIRED_PERMISSIONS && it.value }
             if (permissionGranted) {
                 showDialog()
             } else {
