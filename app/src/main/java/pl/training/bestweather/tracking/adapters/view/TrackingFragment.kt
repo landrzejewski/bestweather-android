@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -56,11 +58,6 @@ class TrackingFragment : Fragment() {
         mapFragment.getMapAsync(onMapReady)
     }
 
-    override fun onResume() {
-        super.onResume()
-        requestPermissionLauncher.launch(ACCESS_FINE_LOCATION)
-    }
-
     override fun onPause() {
         super.onPause()
         fusedLocationClient.removeLocationUpdates(onLocationUpdate)
@@ -68,6 +65,7 @@ class TrackingFragment : Fragment() {
 
     private val onMapReady = OnMapReadyCallback {
         map = it
+        requestPermissionLauncher.launch(ACCESS_FINE_LOCATION)
     }
 
     private val onLocationUpdate =  object : LocationCallback() {
@@ -115,15 +113,15 @@ class TrackingFragment : Fragment() {
     }
     private fun drawRoute(location: Location) {
         viewModel.lastLocation?.let { lastLocation ->
+            val color = getColor(requireContext(), R.color.main);
             val options = PolylineOptions()
-            options.color(R.color.main)
+            options.color(color)
             options.width(10F)
             options.add(LatLng(location.latitude, location.longitude))
             options.add(LatLng(lastLocation.latitude, lastLocation.longitude))
             map.addPolyline(options)
         }
     }
-
 
     companion object {
 
