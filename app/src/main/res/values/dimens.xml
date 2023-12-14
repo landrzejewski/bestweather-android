@@ -9,4 +9,6 @@
     <dimen name="normal_font">24sp</dimen>
     <dimen name="small_font">16sp</dimen>
     <dimen name="small_icon">40dp</dimen>
+    <dimen name="profile_photo_size">140dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
 </resources>

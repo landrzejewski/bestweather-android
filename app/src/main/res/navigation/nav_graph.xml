@@ -22,4 +22,11 @@
         tools:layout="@layout/fragment_forecast_details">
     </fragment>
 
+    <fragment
+        android:id="@+id/ProfileFragment"
+        android:name="pl.training.bestweather.profile.adapters.view.ProfileFragment"
+        android:label="@string/profile_fragment_label"
+        tools:layout="@layout/fragment_profile">
+    </fragment>
+
 </navigation>

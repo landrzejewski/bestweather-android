@@ -7,4 +7,6 @@
     <string name="check">Check</string>
     <string name="icon">Icon</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="profile_fragment_label">Profile</string>
+    <string name="profile_photo">Profile photo</string>
 </resources>
