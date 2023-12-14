@@ -36,4 +36,10 @@
         tools:layout="@layout/fragment_profile">
     </fragment>
 
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="pl.training.bestweather.commons.SettingsFragment"
+        android:label="@string/settings_fragment_label">
+    </fragment>
+
 </navigation>

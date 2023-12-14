@@ -2,7 +2,6 @@ package pl.training.bestweather.profile.adapters.view
 
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
@@ -11,7 +10,6 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.provider.MediaStore.Images.Media.DATA
 import android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -24,6 +22,7 @@ import android.widget.Toast.LENGTH_SHORT
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.squareup.picasso.Picasso
 import pl.training.bestweather.commons.RoundedTransformation
 import pl.training.bestweather.databinding.FragmentProfileBinding
@@ -46,6 +45,9 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         bind()
+
+        Log.i("###", PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .getString("forecast_number_of_days", "Unknown").toString())
     }
 
     private fun init() {
