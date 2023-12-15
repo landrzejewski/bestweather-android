@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <permission android:name="pl.training.bestweather.ACCESS_USERS"/>
+
     <application
         android:name=".BestWeatherApplication"
         android:allowBackup="true"
@@ -57,11 +59,17 @@
                 <action android:name="android.intent.action.AIRPLANE_MODE"/>
             </intent-filter>
         </receiver>-->
-        
+
+
+
         <provider
-            android:authorities="pl.training.bestweather.UsersProvider"
+            android:authorities="pl.training.bestweather.commons.components.UsersProvider"
             android:name=".commons.components.UsersProvider"
-            android:exported="true" />
+            android:exported="true"
+            android:readPermission="pl.training.bestweather.ACCESS_USERS"
+            android:multiprocess="true"
+            android:enabled="true"
+            />
 
     </application>
 

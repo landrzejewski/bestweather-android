@@ -75,7 +75,7 @@ class UsersProvider : ContentProvider() {
 
         const val ID_COLUMN = "_id"
         const val NAME_COLUMN = "name"
-        const val PROVIDER_NAME = "pl.training.bestweather.UsersProvider"
+        const val PROVIDER_NAME = "pl.training.bestweather.commons.components.UsersProvider"
         private const val URL = "content://$PROVIDER_NAME/users"
         val CONTENT_URI = Uri.parse(URL)
 

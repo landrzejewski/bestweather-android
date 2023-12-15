@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.Intent.ACTION_AIRPLANE_MODE_CHANGED
 import android.content.IntentFilter
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -54,7 +55,8 @@ class MainActivity : AppCompatActivity() {
         val uri = contentResolver.insert(CONTENT_URI, values)
         Toast.makeText(this, uri.toString(), Toast.LENGTH_LONG).show()
 
-        contentResolver.query(uri!!, null, null, null, null)?.let {
+        Log.i("###", uri.toString())
+        contentResolver.query(Uri.parse("content://pl.training.bestweather.commons.components.UsersProvider/users/11"), null, null, null, null)?.let {
             while (it.moveToNext()) {
                 val idColumnIndex = it.getColumnIndex(UsersProvider.ID_COLUMN)
                 val nameColumnIndex = it.getColumnIndex(UsersProvider.NAME_COLUMN)
