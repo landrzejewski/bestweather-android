@@ -61,15 +61,24 @@
         </receiver>-->
 
 
+        <!-- In extrnal app manifest:
+        <uses-permission android:name="pl.training.bestweather.ACCESS_USERS"/>
+
+        <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+            tools:ignore="QueryAllPackagesPermission" />
+
+        <queries>
+            <provider android:authorities="pl.training.bestweather.commons.component"/>
+        </queries>
+        -->
 
         <provider
-            android:authorities="pl.training.bestweather.commons.components.UsersProvider"
+            android:authorities="pl.training.bestweather.UsersProvider"
             android:name=".commons.components.UsersProvider"
             android:exported="true"
-            android:readPermission="pl.training.bestweather.ACCESS_USERS"
-            android:multiprocess="true"
             android:enabled="true"
-            />
+            android:multiprocess="true"
+            android:readPermission="pl.training.bestweather.ACCESS_USERS" />
 
     </application>
 

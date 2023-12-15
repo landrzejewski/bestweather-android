@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, uri.toString(), Toast.LENGTH_LONG).show()
 
         Log.i("###", uri.toString())
-        contentResolver.query(Uri.parse("content://pl.training.bestweather.commons.components.UsersProvider/users/11"), null, null, null, null)?.let {
+        contentResolver.query(Uri.parse("content://pl.training.bestweather.commons.components.UsersProvider/users"), null, null, null, null)?.let {
             while (it.moveToNext()) {
                 val idColumnIndex = it.getColumnIndex(UsersProvider.ID_COLUMN)
                 val nameColumnIndex = it.getColumnIndex(UsersProvider.NAME_COLUMN)
