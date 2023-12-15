@@ -80,6 +80,14 @@
             android:multiprocess="true"
             android:readPermission="pl.training.bestweather.ACCESS_USERS" />
 
+        <service android:name=".commons.components.ExampleService" android:enabled="true" android:foregroundServiceType="dataSync"/>
+
+        <receiver android:name=".commons.components.Restarter" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="restart_example_service"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
