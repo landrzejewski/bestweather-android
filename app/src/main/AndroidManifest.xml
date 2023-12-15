@@ -51,6 +51,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--<receiver android:name=".commons.components.AirplaneModeReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+            </intent-filter>
+        </receiver>-->
+        
+        <provider
+            android:authorities="pl.training.bestweather.UsersProvider"
+            android:name=".commons.components.UsersProvider"
+            android:exported="true" />
+
     </application>
 
 </manifest>
