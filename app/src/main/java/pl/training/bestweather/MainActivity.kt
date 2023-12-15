@@ -6,6 +6,7 @@ import android.content.Intent.ACTION_AIRPLANE_MODE_CHANGED
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment.*
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -23,6 +24,8 @@ import pl.training.bestweather.commons.components.CounterService
 import pl.training.bestweather.commons.components.UsersProvider
 import pl.training.bestweather.commons.components.UsersProvider.Companion.CONTENT_URI
 import pl.training.bestweather.databinding.ActivityMainBinding
+import java.io.File
+import java.nio.file.Files
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -68,8 +71,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         val intent = Intent(this, CounterService::class.java)
-        startService(intent)
+        //startService(intent)
+
+        // App storage
+        // val file = File(this.filesDir, "data.txt")
+
+        openFileOutput("data.txt", MODE_PRIVATE).use {
+            it.write("To jest Android".toByteArray())
+        }
+
+        openFileInput("data.txt").bufferedReader().forEachLine {
+            Log.i("###", "data.txt ($filesDir): $it")
+        }
+
+        // External storage
+        if (externalStorageExists() && externalStorageIsWriteable()) {
+            val path = File(getExternalFilesDir("Data"), "app_data.txt").toPath()
+            Files.write(path, "To jest Android".toByteArray())
+            Files.readAllLines(path).forEach {
+                Log.i("###", "app_data.txt ($path): $it")
+            }
+        }
+
     }
+
+    private fun externalStorageExists() = MEDIA_MOUNTED == getExternalStorageState()
+
+    private fun externalStorageIsWriteable() = MEDIA_MOUNTED_READ_ONLY != getExternalStorageState()
 
     override fun onStop() {
         super.onStop()
