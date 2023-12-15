@@ -6,13 +6,12 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import androidx.annotation.RequiresApi
-import java.util.*
+import java.util.Timer
+import java.util.TimerTask
 
-class ExampleService : Service() {
+class CounterService : Service() {
 
     private var counter = 0
     private lateinit var timer: Timer
@@ -23,14 +22,9 @@ class ExampleService : Service() {
     override fun onCreate() {
         super.onCreate()
         Log.d("###", "Example service on create ")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            start()
-        } else {
-            startForeground(1, Notification())
-        }
+        start()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun start() {
         val channelId = "training"
         val channelName = "exampleService"
@@ -66,9 +60,6 @@ class ExampleService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         timer.cancel()
-        val intent =  Intent(this, Restarter::class.java)
-        intent.action = "restart_example_service"
-        sendBroadcast(intent)
     }
 
 }

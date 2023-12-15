@@ -1,6 +1,5 @@
 package pl.training.bestweather
 
-import android.app.ActivityManager
 import android.content.ContentValues
 import android.content.Intent
 import android.content.Intent.ACTION_AIRPLANE_MODE_CHANGED
@@ -20,10 +19,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import pl.training.bestweather.commons.components.AirplaneModeReceiver
+import pl.training.bestweather.commons.components.CounterService
 import pl.training.bestweather.commons.components.UsersProvider
 import pl.training.bestweather.commons.components.UsersProvider.Companion.CONTENT_URI
 import pl.training.bestweather.databinding.ActivityMainBinding
-import pl.training.bestweather.commons.components.ExampleService
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val airplaneReceiver = AirplaneModeReceiver()
-    private lateinit var exampleService: ExampleService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,28 +67,15 @@ class MainActivity : AppCompatActivity() {
             it.close()
         }
 
-        exampleService = ExampleService()
-        val intent = Intent(this, exampleService::class.java)
-        if (!isServiceRunning(ExampleService::class.java)) {
-            startService(intent)
-        }
-    }
-
-    private fun isServiceRunning(serviceClass: Class<*>): Boolean {
-        val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
-        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                Log.i("###", "Service is running")
-                return true
-            }
-        }
-        Log.i("###", "Service is not running")
-        return false
+        val intent = Intent(this, CounterService::class.java)
+        startService(intent)
     }
 
     override fun onStop() {
         super.onStop()
         unregisterReceiver(airplaneReceiver)
+        val intent = Intent(this, CounterService::class.java)
+        stopService(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {

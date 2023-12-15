@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
     <permission android:name="pl.training.bestweather.ACCESS_USERS"/>
 
@@ -73,20 +75,17 @@
         -->
 
         <provider
-            android:authorities="pl.training.bestweather.UsersProvider"
+            android:authorities="pl.training.bestweather.commons.components.UsersProvider"
             android:name=".commons.components.UsersProvider"
             android:exported="true"
             android:enabled="true"
             android:multiprocess="true"
             android:readPermission="pl.training.bestweather.ACCESS_USERS" />
 
-        <service android:name=".commons.components.ExampleService" android:enabled="true" android:foregroundServiceType="dataSync"/>
-
-        <receiver android:name=".commons.components.Restarter" android:enabled="true" android:exported="true">
-            <intent-filter>
-                <action android:name="restart_example_service"/>
-            </intent-filter>
-        </receiver>
+        <service android:name=".commons.components.CounterService"
+            android:enabled="true"
+            android:foregroundServiceType="dataSync"
+            android:exported="true" />
 
     </application>
 
